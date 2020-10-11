@@ -1,42 +1,31 @@
 define([
     'base/js/namespace',
-    'jquery',
-    'require',
     'base/js/events',
-    'base/js/utils',
-], function(Jupyter, $, requirejs, events, configmod, utils) {
-    "use strict";
-
-    var load_extension = function() {
-             Jupyter.toolbar.add_buttons_group([
-                 Jupyter.keyboard_manager.actions.register ({
-                      'help'   : 'Insert Cell Above',
-                      'icon'   : 'fa-arrow-circle-o-up',
-                      'handler': function () {
-                                                    Jupyter.notebook.insert_cell_above('code');
-                                                    Jupyter.notebook.select_prev();
-                                                    Jupyter.notebook.focus_cell();
-                      }
-                 }, 'insert-cell-above', 'addbefore'),
-                 Jupyter.keyboard_manager.actions.register ({
-                      'help'   : 'Insert Cell Below',
-                      'icon'   : 'fa-arrow-circle-o-down',
-                      'handler': function () {
-                                                    Jupyter.notebook.insert_cell_below('code');
-                                                    Jupyter.notebook.select_next();
-                                                    Jupyter.notebook.focus_cell();
-                      }
-                 }, 'insert-cell-below', 'addbefore'),
-                 ]);
-             $('#insert_above_below').remove()
-
+    'notebook/js/codecell'
+], function (Jupyter, events, codecell) {
+    var removeHighlight = function(){
+        var cell = Jupyter.notebook.get_selected_cell();
+        if (cell instanceof codecell.CodeCell){
+            var prompt = cell.element.find('div.input_area');
+            prompt.removeClass('CodeMirror cm-s-ipython');
+        }
     };
-
-
-
-    var extension = {
-        load_jupyter_extension : load_extension,
-        load_ipython_extension : load_extension
+    
+    var changeHighlight = function(){
+        removeHighlight();
     };
-    return extension;
+    var load_ipython_extension = function () {
+        Jupyter.toolbar.add_buttons_group([
+            Jupyter.keyboard_manager.actions.register({
+                'help': 'Increase code font size',
+                'icon': 'fa-search-plus',
+                'handler': function () {
+                    $(document).ready(changeHighlight());
+                }
+            }, 'changeHighlight', 'sql_magiclight')
+        ]);
+    };
+    return {
+        load_ipython_extension: load_ipython_extension
+    };
 });
