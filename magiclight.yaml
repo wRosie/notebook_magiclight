@@ -2,5 +2,5 @@ Type: IPython Notebook Extension
 Name: AddBefore
 Description: This extension enables the Add Cell before button (from iPython 1)
 Link: README.md
-Main: addcell.js
+Main: index.js
 Compatibility: 4.x
