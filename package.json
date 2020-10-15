@@ -1,6 +1,6 @@
 {
     "scripts": {
-        "test": "mocha"
+        "test": "nyc mocha"
     },
     "devDependencies": {
         "chai": "^4.2.0",
