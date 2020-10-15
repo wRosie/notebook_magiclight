@@ -2,6 +2,7 @@
 ![GitHub](https://img.shields.io/github/license/wRosie/SQL_Magiclight?label=license)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity)
 ![GitHub last commit](https://img.shields.io/github/last-commit/wRosie/SQL_Magiclight)
+![Build](https://travis-ci.org/wRosie/SQL_Magiclight.svg?branch=master)
 
 This is a Jupyter notebook extension to add availible syntax highlighting for cell magic. 
 
