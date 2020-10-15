@@ -5,6 +5,7 @@ node_js:
 install:
   - npm i --save-dev mocha
   - npm i --save-dev chai
+  - npm install -g codecov
 
 script:
   - npm test
