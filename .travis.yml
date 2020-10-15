@@ -1,0 +1,14 @@
+language: node_js
+node_js:
+  - "0.10"
+
+install:
+  - npm i --save-dev mocha
+  - npm i --save-dev chai
+
+script:
+  - npm test
+
+branches:
+  only:
+  - master
