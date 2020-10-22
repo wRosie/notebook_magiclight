@@ -7,8 +7,10 @@ install:
   - npm i --save-dev chai
   - npm install -g codecov
   - npm install -g istanbul
+  - npm install eslint --save-dev
 
 script:
+  - npx eslint index.js
   - npm test
 
 after_success:
