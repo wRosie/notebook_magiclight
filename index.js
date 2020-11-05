@@ -20,24 +20,52 @@ define([
         return modes;
     }
     
+    var searchForCodeMirrorMode = function(modes){
+        modeToMimes = {}
+        for (i = 0; i < modes.length; i++) {
+            m = CodeMirror.findModeByName(modes[i])
+            if(m != undefined){
+                modeToMimes[modes[i]] = m;
+            }
+        return modeToMimes;
+    }
+
     //HardCode SQL for now
-    var changeHighlight = function(){
-        console.log("in change");
-        codecell.CodeCell.options_default.highlight_modes['magic_text/x-mysql'] = { 'reg': [/^%%sql/] };
+    var changeHighlight = function(mode, mime){
+        key = 'magic_' + mime;
+        var re = new RegExp("\\b^%%" + mode + "\\b"); 
+        console.log(mode+re.test('%%sql'));
+        modesDict = codecell.CodeCell.options_default.highlight_modes;
+        if(key in modesDict){
+            modesDict[key]['reg'].push(re);
+        }
+        else{
+            modesDict[key] = { 'reg': [re] };
+        }
         Jupyter.notebook.events.one('kernel_ready.Kernel', function () {
             Jupyter.notebook.get_cells().map(function (cell) {
                 if (cell.cell_type == 'code') { cell.auto_highlight(); }
             });
         });
+        // console.log("in change");
+        // codecell.CodeCell.options_default.highlight_modes['magic_text/x-mysql'] = { 'reg': [/^%%sql/] };
+        // Jupyter.notebook.events.one('kernel_ready.Kernel', function () {
+        //     Jupyter.notebook.get_cells().map(function (cell) {
+        //         if (cell.cell_type == 'code') { cell.auto_highlight(); }
+        //     });
+        // });
     };
 
     var initialize = function(){
         var cells = Jupyter.notebook.get_cells();
         var modes = findMagic(cells);
         console.log("modes:" + modes);
-        //searchForCodeMirrorMode();
+        modeToMimes = searchForCodeMirrorMode();
         //if not exist
-        changeHighlight();
+        for(var mode in modeToMimes){
+            changeHighlight(mode, modeToMimes[mode]);
+        }
+        
     }
 
     var load_ipython_extension = function () {
