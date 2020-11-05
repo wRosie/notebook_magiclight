@@ -3,8 +3,11 @@
         "test": "mocha"
     },
     "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "^4.5.0",
+        "@typescript-eslint/parser": "^4.5.0",
         "chai": "^4.2.0",
         "codecov": "^3.8.0",
+        "eslint": "^7.11.0",
         "mocha": "^8.1.3"
     }
 }
