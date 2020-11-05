@@ -6,11 +6,15 @@ install:
   - npm i --save-dev mocha
   - npm i --save-dev chai
   - npm install -g codecov
+  - npm install -g istanbul
+  - npm install eslint --save-dev
 
 script:
+  - npx eslint index.js
   - npm test
 
 after_success:
+  - istanbul cover ./node_modules/mocha/bin/_mocha --reporter -- -R spec
   - codecov
 
 branches:
