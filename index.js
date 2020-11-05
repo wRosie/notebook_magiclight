@@ -21,14 +21,15 @@ define([
     }
     
     var searchForCodeMirrorMode = function(modes){
-        modeToMimes = {}
+        modeToMimes = {};
         for (i = 0; i < modes.length; i++) {
             m = CodeMirror.findModeByName(modes[i])
             if(m != undefined){
                 modeToMimes[modes[i]] = m;
             }
+        }
         return modeToMimes;
-    }
+    };
 
     //HardCode SQL for now
     var changeHighlight = function(mode, mime){
