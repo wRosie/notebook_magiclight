@@ -3,3 +3,9 @@ node_modules
 coverage
 package-lock.json
 .DS_Store
+
+docs/_build
+docs/_static
+docs/_templates
+
+.vscode
