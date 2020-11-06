@@ -2,29 +2,32 @@ define([
     'base/js/namespace',
     'base/js/events',
     'notebook/js/codecell',
+    'codemirror/lib/codemirror',
     'codemirror/addon/mode/loadmode'
 ], function (Jupyter, events, codecell, CodeMirror) {
 
-    var findMagic = function(cells){
+    var findMagic = function (cells) {
         var modes = []
-        for(i = 0; i < cells.length; i++){
-            if(cells[i].get_text().startsWith('%%')){
+        for (i = 0; i < cells.length; i++) {
+            if (cells[i].get_text().startsWith('%%')) {
                 console.log('get magic');
-                var magic = cells[i].get_text().split(/ |\n/)[0]; 
-                if (magic.length > 2){
-                    magic = magic.substring(2,magic.length);
-                    if(!modes.includes(magic)) modes.push(magic);
+                var magic = cells[i].get_text().split(/ |\n/)[0];
+                if (magic.length > 2) {
+                    magic = magic.substring(2, magic.length);
+                    if (!modes.includes(magic)) modes.push(magic);
                 }
             }
         }
         return modes;
     }
-    
-    var searchForCodeMirrorMode = function(modes){
+
+    var searchForCodeMirrorMode = function (modes) {
         modeToMimes = {};
         for (i = 0; i < modes.length; i++) {
-            m = CodeMirror.findModeByName(modes[i])
-            if(m != undefined){
+            //console.log(i + modes[i]);
+            //console.log('codemirror str '+CodeMirror.toString());
+            var m = CodeMirror.findModeByName(modes[i]);
+            if (m != undefined) {
                 modeToMimes[modes[i]] = m;
             }
         }
@@ -32,15 +35,15 @@ define([
     };
 
     //HardCode SQL for now
-    var changeHighlight = function(mode, mime){
+    var changeHighlight = function (mode, mime) {
         key = 'magic_' + mime;
-        var re = new RegExp("\\b^%%" + mode + "\\b"); 
-        console.log(mode+re.test('%%sql'));
+        var re = new RegExp("^%%" + mode);
+        console.log(mode + re.test('%%sql'));
         modesDict = codecell.CodeCell.options_default.highlight_modes;
-        if(key in modesDict){
+        if (key in modesDict) {
             modesDict[key]['reg'].push(re);
         }
-        else{
+        else {
             modesDict[key] = { 'reg': [re] };
         }
         Jupyter.notebook.events.one('kernel_ready.Kernel', function () {
@@ -57,16 +60,17 @@ define([
         // });
     };
 
-    var initialize = function(){
+    var initialize = function () {
         var cells = Jupyter.notebook.get_cells();
-        var modes = findMagic(cells);
+        modes = findMagic(cells);
         console.log("modes:" + modes);
-        modeToMimes = searchForCodeMirrorMode();
+        modeToMimes = searchForCodeMirrorMode(modes);
         //if not exist
-        for(var mode in modeToMimes){
-            changeHighlight(mode, modeToMimes[mode]);
+        console.log(modeToMimes)
+        for (var mode in modeToMimes) {
+            changeHighlight(mode, modeToMimes[mode]['mime']);
         }
-        
+
     }
 
     var load_ipython_extension = function () {
