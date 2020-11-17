@@ -28,10 +28,17 @@ And you are good to go! No more ugly magic cells!
 # Demo
 Before installing the extension, your magic cells probably look like this:
 
-Some cell magics may have built in syntax highlighting, depending on your jupyter default settings.
+Some cell magics may have built in syntax highlighting, depending on your default settings.
 
-But most of them will look like a mess because they are using the default IPython highlighting.
+But most of them could look like a mess because they are using the default IPython highlighting.
 ![Before](demo_before.png)
 
 The notebook_magiclight extension will automatically detect the cell magics you use, and apply the correct syntax highlighting to them.
 ![After](demo_after.png)
+
+The syntax highlight also updates when typing, just like any other properly highlighted code blocks.
+
+![Update](demo_update.gif)
+
+# Future development
+This v0.1 only supports block magics that starts with "%%". I will implement inline magic soon.
