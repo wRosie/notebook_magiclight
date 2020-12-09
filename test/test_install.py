@@ -1,11 +1,11 @@
+#coding=utf-8
+
 import os
 from os.path import basename, join as pjoin
 from notebook import nbextensions
 from notebook.nbextensions import (install_nbextension, check_nbextension,
-    enable_nbextension, disable_nbextension,
-    install_nbextension_python, uninstall_nbextension_python,
-    enable_nbextension_python, disable_nbextension_python, _get_config_dir,
-    validate_nbextension, validate_nbextension_python
+    enable_nbextension, disable_nbextension, _get_config_dir,
+    validate_nbextension
 )
 
 from notebook.config_manager import BaseJSONConfigManager
@@ -28,7 +28,6 @@ def test_check_enable():
     enabled = cm.get('notebook').get('load_extensions',
                                      {}).get('notebook_magiclight/index',
                                              False)
-    print('hello')
     assert enabled
 
 def test_check_disable():
@@ -39,7 +38,3 @@ def test_check_disable():
     cm = BaseJSONConfigManager(config_dir=config_dir)
     enabled = cm.get('notebook').get('load_extensions', {}).get(u'ƒ', False)
     assert not enabled
-
-# test_install_nbextension()
-# test_check()
-# check_enable()
