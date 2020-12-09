@@ -1,5 +1,5 @@
 Type: IPython Notebook Extension
-Name: AddBefore
+Name: notebook_magiclight
 Description: This extension enables the Add Cell before button (from iPython 1)
 Link: README.md
 Main: index.js
