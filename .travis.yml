@@ -13,7 +13,7 @@ install:
 script:
   - npx eslint index.js
   - npm test
-  - python -m pytest -vvv test/
+  - sudo python -m pytest -vvv test/
 
 after_success:
   - istanbul cover ./node_modules/mocha/bin/_mocha --reporter -- -R spec
