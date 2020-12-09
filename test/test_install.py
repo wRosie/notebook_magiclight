@@ -1,3 +1,5 @@
+#coding=utf-8
+
 import os
 from os.path import basename, join as pjoin
 from notebook import nbextensions
@@ -28,7 +30,6 @@ def test_check_enable():
     enabled = cm.get('notebook').get('load_extensions',
                                      {}).get('notebook_magiclight/index',
                                              False)
-    print('hello')
     assert enabled
 
 def test_check_disable():
@@ -39,7 +40,3 @@ def test_check_disable():
     cm = BaseJSONConfigManager(config_dir=config_dir)
     enabled = cm.get('notebook').get('load_extensions', {}).get(u'ƒ', False)
     assert not enabled
-
-# test_install_nbextension()
-# test_check()
-# check_enable()
