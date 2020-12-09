@@ -28,7 +28,6 @@ def test_check_enable():
     enabled = cm.get('notebook').get('load_extensions',
                                      {}).get('notebook_magiclight/index',
                                              False)
-    print('hello')
     assert enabled
 
 def test_check_disable():
