@@ -37,7 +37,7 @@ define([
      * @param {string[]} modes - The names of the cell magics.
      * @return {Object.<string, Object>} - Key: name of the cell magic. Value: the codemirror mode.
      */
-    var searchForCodeMirrorMode = function (modes) {
+     var searchForCodeMirrorMode = function (modes) {
         modeToMimes = {};
         for (i = 0; i < modes.length; i++) {
             //console.log(i + modes[i]);

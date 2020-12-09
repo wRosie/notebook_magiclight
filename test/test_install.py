@@ -4,10 +4,8 @@ import os
 from os.path import basename, join as pjoin
 from notebook import nbextensions
 from notebook.nbextensions import (install_nbextension, check_nbextension,
-    enable_nbextension, disable_nbextension,
-    install_nbextension_python, uninstall_nbextension_python,
-    enable_nbextension_python, disable_nbextension_python, _get_config_dir,
-    validate_nbextension, validate_nbextension_python
+    enable_nbextension, disable_nbextension, _get_config_dir,
+    validate_nbextension
 )
 
 from notebook.config_manager import BaseJSONConfigManager

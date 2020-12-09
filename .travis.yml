@@ -5,10 +5,10 @@ node_js:
 install:
   - npm i --save-dev mocha
   - npm i --save-dev chai
-  - npm install -g codecov
-  - npm install -g istanbul
+  - npm install --save-dev codecov
+  - npm install --save-dev istanbul
   - npm install eslint --save-dev
-  - pip install pytest pytest-cov
+  - pip install jupyter pytest
 
 script:
   - npx eslint index.js
