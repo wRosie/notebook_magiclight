@@ -8,10 +8,12 @@ install:
   - npm install -g codecov
   - npm install -g istanbul
   - npm install eslint --save-dev
+  - pip install pytest pytest-cov
 
 script:
   - npx eslint index.js
   - npm test
+  - python -m pytest -vvv test/
 
 after_success:
   - istanbul cover ./node_modules/mocha/bin/_mocha --reporter -- -R spec
