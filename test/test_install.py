@@ -15,9 +15,9 @@ def test_install_nbextension():
     res = install_nbextension('..')
     assert (res is not None)
 
-def test_check_installed():
-    installed = check_nbextension(['notebook_magiclight'], user=False)
-    assert (installed)
+# def test_check_installed():
+#     installed = check_nbextension(['notebook_magiclight'], user=False)
+#     assert (installed)
 
 
 def test_check_enable():
@@ -38,3 +38,12 @@ def test_check_disable():
     cm = BaseJSONConfigManager(config_dir=config_dir)
     enabled = cm.get('notebook').get('load_extensions', {}).get(u'ƒ', False)
     assert not enabled
+
+def  test_check_validate():
+    test_install_nbextension()
+    test_check_enable()
+    res = validate_nbextension('notebook_magiclight/index')
+    assert (res == [])
+
+
+test_check_validate()
